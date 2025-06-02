@@ -4,9 +4,10 @@ from django.contrib import messages
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.middleware.csrf import get_token
 from django.http import HttpResponse
-
+from .forms import SignUpForm
 
 # Create your views here.
+
 
 def home(request):
     # check to see if user is logged in
@@ -44,4 +45,21 @@ def logout_user(request):
 
 
 def register_user(request):
-    return render(request, 'register.html', {})
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # authenticate and login
+            user = authenticate(
+                username=form.cleaned_data.get('username'),
+                password=form.cleaned_data.get('password1')
+            )
+            login(request, user)
+            messages.success(request, "You have successfully registered")
+            return redirect('home')
+        else:
+            messages.error(
+                request, "Unsuccessful registration. Invalid information.")
+    else:
+        form = SignUpForm()
+        return render(request, 'register.html', {'form': form})
