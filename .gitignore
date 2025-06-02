@@ -52,3 +52,11 @@ local_settings.py
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Media files
+media/
+
+# Static files
+staticfiles/
+
+
