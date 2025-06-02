@@ -59,6 +59,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -120,6 +121,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# CSRF and Cookie Settings
+CSRF_COOKIE_SECURE = False  # Set to True if using HTTPS
+SESSION_COOKIE_SECURE = False  # Set to True if using HTTPS
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000']
+CSRF_USE_SESSIONS = True  # Store CSRF token in session instead of cookie
+CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript to access the cookie
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
