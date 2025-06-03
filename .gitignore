@@ -42,7 +42,6 @@ local_settings.py
 
 # IDE / Editor
 .idea/
-.vscode/
 
 # OS generated files
 .DS_Store
@@ -60,3 +59,5 @@ media/
 staticfiles/
 
 
+config.bat
+node_modules
